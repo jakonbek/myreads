@@ -3,9 +3,27 @@ import PropTypes from 'prop-types'
 
 class Book extends React.Component {
 
+constructor(props) {
+    super(props);
+    this.state = this.props;
+
+    this.handleChange = this.handleChange.bind(this);
+
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+
+
+onShelfChange(book,shelf){
+        this.setState({shelf: event.target.value});
+        }
 render(){
 const  noThumbLink = "https://books.google.com/googlebooks/images/no_cover_thumb.gif"
-const book = this.props
+const book = this.props.book
+
 
    return(
 
@@ -19,8 +37,8 @@ const book = this.props
                                                               book.imageLinks ? book.imageLinks.thumbnail : noThumbLink
                                                               })`}}>
                                </div>
-                               <div className="book-shelf-changer">
-                                 <select>
+<div className="book-shelf-changer">
+                                 <select value={this.state.value} onChange={this.handleChange}>
                                    <option value="none" disabled>Move to...</option>
                                    <option value="currentlyReading">Currently Reading</option>
                                    <option value="wantToRead">Want to Read</option>

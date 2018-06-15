@@ -4,7 +4,7 @@ import Book from './Book'
 class ShelfBook extends React.Component {
 
  render(){
-const { books }= this.props
+const { books,shelf}= this.props
 console.log('Props', this.props)
 return(
              <div className="bookshelf">
@@ -15,14 +15,13 @@ return(
                                    <Book
                                          key={index}
                                          book={book}
-                                         books={books}
+                                         shelf={shelf}
                                          />
                                    ))}
                                 </ol>
                                 </div>
-              </div>
+                                </div>
 )
-
 }
 }
 export default ShelfBook;
