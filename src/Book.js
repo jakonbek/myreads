@@ -1,30 +1,36 @@
 import React  from 'react'
 import PropTypes from 'prop-types'
+import * as BooksAPI from './utils/BooksAPI'
 
 class Book extends React.Component {
 
-constructor(props) {
-    super(props);
-    this.state = this.props;
+state={
+         books: [],
 
-    this.handleChange = this.handleChange.bind(this);
+       }
 
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-
-
-onShelfChange(book,shelf){
-        this.setState({shelf: event.target.value});
+componentDidMount() {
+      BooksAPI.getAll()
+           .then( (books) => {
+           this.setState({ books })
+            })
         }
+
+
+shelfChange = (book,shelf) => {
+        book.shelf = shelf
+        BooksAPI.update(book,shelf).then(() => {
+        BooksAPI.getAll().then((books)=>{
+         this.setState((prevState)=>({
+         books
+         }))
+        })
+     })
+    }
+
 render(){
 const  noThumbLink = "https://books.google.com/googlebooks/images/no_cover_thumb.gif"
 const book = this.props.book
-
-
    return(
 
     <div className="book">
@@ -37,8 +43,8 @@ const book = this.props.book
                                                               book.imageLinks ? book.imageLinks.thumbnail : noThumbLink
                                                               })`}}>
                                </div>
-<div className="book-shelf-changer">
-                                 <select value={this.state.value} onChange={this.handleChange}>
+                               <div className="book-shelf-changer">
+                                 <select >
                                    <option value="none" disabled>Move to...</option>
                                    <option value="currentlyReading">Currently Reading</option>
                                    <option value="wantToRead">Want to Read</option>

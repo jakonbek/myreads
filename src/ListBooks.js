@@ -1,5 +1,4 @@
 import React  from 'react'
-import SearchBook from './SearchBook'
 import ShelfBook from './ShelfBook'
 import * as BooksAPI from './utils/BooksAPI'
 import { Link } from 'react-router-dom'
@@ -24,6 +23,7 @@ const bookShelves = [
       { value: 'wantToRead',  name: 'Want to Read' },
       { value: 'read', name: 'Read'} ]
 
+
 return (
 
  <div className="list-books">
@@ -46,7 +46,7 @@ return (
 
 </div>
  <div className="open-search">
-                                  <Link to="/add"><SearchBook/></Link>
+                                  <Link to="/search">Add Book</Link>
 
                                   </div>
 

@@ -5,7 +5,8 @@ class ShelfBook extends React.Component {
 
  render(){
 const { books,shelf}= this.props
-console.log('Props', this.props)
+const shelfChange = this.props.shelfChange
+
 return(
              <div className="bookshelf">
                                <h2 className="bookshelf-title"></h2>
@@ -14,9 +15,9 @@ return(
                                    {books.map((book,index) =>(
                                    <Book
                                          key={index}
+                                         shelfChange={shelfChange}
                                          book={book}
-                                         shelf={shelf}
-                                         />
+                                    />
                                    ))}
                                 </ol>
                                 </div>
