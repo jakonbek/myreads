@@ -6,6 +6,7 @@ class Book extends React.Component {
 
 state={
          books: [],
+         shelfChange: PropTypes.func
 
        }
 
@@ -15,14 +16,16 @@ componentDidMount() {
            this.setState({ books })
             })
         }
-
+handleChange(book,shelf) {
+    this.setState({value: event.target.value});
+  }
 
 shelfChange = (book,shelf) => {
         book.shelf = shelf
         BooksAPI.update(book,shelf).then(() => {
-        BooksAPI.getAll().then((books)=>{
+        BooksAPI.getAll().then((book)=>{
          this.setState((prevState)=>({
-         books
+         book
          }))
         })
      })
@@ -30,7 +33,7 @@ shelfChange = (book,shelf) => {
 
 render(){
 const  noThumbLink = "https://books.google.com/googlebooks/images/no_cover_thumb.gif"
-const book = this.props.book
+const {book, shelf, shelfChange} = this.props
    return(
 
     <div className="book">
@@ -44,7 +47,7 @@ const book = this.props.book
                                                               })`}}>
                                </div>
                                <div className="book-shelf-changer">
-                                 <select >
+                                 <select value={shelf} onChange={(event) => shelfChange(event.target.value,book)} >
                                    <option value="none" disabled>Move to...</option>
                                    <option value="currentlyReading">Currently Reading</option>
                                    <option value="wantToRead">Want to Read</option>

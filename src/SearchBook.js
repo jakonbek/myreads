@@ -1,7 +1,8 @@
 import React from 'react'
 import * as BooksAPI from './utils/BooksAPI'
 import {DebounceInput} from 'react-debounce-input';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import ShelfBook from './ShelfBook';
 
 class SearchBook extends React.Component {
 state={
@@ -10,6 +11,7 @@ state={
        }
 
 updateQuery = (query) => {
+  BooksAPI.getAll()
   this.setState(() =>({
    query : query.trim()
   }))
@@ -53,6 +55,7 @@ return(
                                                        </div>
                                                      </div>
                                                      <div className="search-books-results">
+                                                     <ShelfBook books={books}/>
                                                        <ol className="books-grid"></ol>
                                                      </div>
                                     </div>

@@ -4,8 +4,7 @@ import Book from './Book'
 class ShelfBook extends React.Component {
 
  render(){
-const { books,shelf}= this.props
-const shelfChange = this.props.shelfChange
+const { books,bookShelves, shelfChange }= this.props
 
 return(
              <div className="bookshelf">
